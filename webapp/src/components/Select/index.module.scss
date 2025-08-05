@@ -1,4 +1,5 @@
 @use '../../styles/vars' as vars;
+
 .field {
   margin-bottom: 15px;
 }
@@ -10,23 +11,37 @@
   color: #333;
 }
 
-.select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
-  box-sizing: border-box;
+.selectWrapper {
+  position: relative;
 
-  &:focus {
-    border-color: vars.$blue;
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgb(0, 123, 255, 0.25);
+  .select {
+    width: 100%;
+    padding: 10px;
+    padding-right: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+    appearance: none;
+
+    &:focus {
+      border-color: vars.$blue;
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgb(0, 123, 255, 0.25);
+    }
   }
-}
 
-.invalid .select {
-  border-color: vars.$red;
+  .arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .invalid .select {
+    border-color: vars.$red;
+  }
 }
 
 .error {

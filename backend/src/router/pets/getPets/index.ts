@@ -9,8 +9,8 @@ export const getPetsTrpcRoute = trpcLoggedProcedure.input(zGetPetsTrpcInput).que
   const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, ' & ') : undefined
   const isAdmin =
     ctx.me &&
-    (ctx.me.permissions.includes('APPROVE_PERSON') ||
-      ctx.me.permissions.includes('BLOCK_PERSONS') ||
+    (ctx.me.permissions.includes('APPROVE_PET') ||
+      ctx.me.permissions.includes('BLOCK_PETS') ||
       ctx.me.permissions.includes('ALL'))
 
   const orderBy: Prisma.PetOrderByWithRelationInput[] = []

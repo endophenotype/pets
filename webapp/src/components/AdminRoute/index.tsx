@@ -12,7 +12,7 @@ export const AdminRoute = () => {
 
   if (
     !(
-      data?.me?.permissions.includes('BLOCK_PERSONS') ||
+      data?.me?.permissions.includes('BLOCK_PETS') ||
       data?.me?.permissions.includes('ALL') ||
       data?.me?.permissions.includes('EDIT_STATIC_PAGES')
     )

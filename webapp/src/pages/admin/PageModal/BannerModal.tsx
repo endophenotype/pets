@@ -9,6 +9,7 @@ import { UploadToCloudinary } from '../../../components/UploadToCloudinary'
 import { useForm } from '../../../lib/form'
 import { trpc } from '../../../lib/trpc'
 
+import css from './PageModal.module.scss'
 type Props = {
   isOpen: boolean
   onClose: () => void
@@ -61,11 +62,12 @@ export const BannerModal = ({ isOpen, onClose, banner }: Props) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={banner ? 'Edit Banner' : 'Create Banner'}>
       <form onSubmit={formik.handleSubmit}>
+        <Input className={css.modalInput} label="Text" name="text" formik={formik} />
+        <Input className={css.modalInput} label="Link" name="link" formik={formik} />
         <UploadToCloudinary label="Image" name="image" formik={formik} type="image" preset="banners" />
-        <Input label="Text" name="text" formik={formik} />
-        <Input label="Link" name="link" formik={formik} />
         <Select
           label="Position"
+          id="position"
           {...formik.getFieldProps('position')}
           error={formik.touched.position ? formik.errors.position : undefined}
         >

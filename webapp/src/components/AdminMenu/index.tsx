@@ -9,7 +9,7 @@ export const AdminMenu = () => {
   const { data } = trpc.getMe.useQuery()
   const me = data?.me
 
-  const canViewBlock = me?.permissions.includes('BLOCK_PERSONS') || me?.permissions.includes('ALL')
+  const canViewBlock = me?.permissions.includes('BLOCK_PETS') || me?.permissions.includes('ALL')
   const canEditStaticPages = me?.permissions.includes('EDIT_STATIC_PAGES') || me?.permissions.includes('ALL')
   const canManageBanners = me?.permissions.includes('MANAGE_BANNERS') || me?.permissions.includes('ALL')
 

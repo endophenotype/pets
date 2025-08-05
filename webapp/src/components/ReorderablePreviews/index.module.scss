@@ -1,0 +1,83 @@
+@use '../../styles/vars' as vars;
+
+.previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.previewPlace {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #00000080;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: vars.$red;
+  padding: 0;
+
+  &:hover {
+    background: #000000cc;
+  }
+}
+
+.deleteIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.orderButtons {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  display: flex;
+  gap: 4px;
+}
+
+.orderButton {
+  background: #00000080;
+  border: none;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  padding: 0;
+
+  &:hover {
+    background: #000000cc;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.orderIcon {
+  width: 16px;
+  height: 16px;
+}

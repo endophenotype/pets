@@ -48,8 +48,9 @@ RUN pnpm install --filter backend --prod --frozen-lockfile --ignore-scripts
 # Копируем собранные артефакты
 COPY --from=builder /app/backend/dist ./backend/dist
 COPY --from=builder /app/webapp/dist ./webapp/dist
-# Копируем схему Prisma, необходимую для работы
+# Копируем схему Prisma и миграции, необходимые для работы
 COPY --from=builder /app/backend/src/prisma/schema.prisma ./backend/src/prisma/schema.prisma
+COPY --from=builder /app/backend/src/prisma/migrations ./backend/src/prisma/migrations
 
 # Генерируем Prisma Client в финальном образе
 RUN pnpm --filter backend exec prisma generate
@@ -59,6 +60,5 @@ ARG SOURCE_VERSION
 ENV SOURCE_VERSION=$SOURCE_VERSION
 ENV NODE_ENV=production
 
-# Запускаем приложение
-# Убедитесь, что скрипт "start" в backend/package.json указывает на запуск скомпилированного файла, например: "node dist/index.js"
-CMD ["pnpm", "--filter", "backend", "start"]
+# Запускаем миграции и затем приложение
+CMD ["sh", "-c", "pnpm --filter backend exec prisma migrate deploy && pnpm --filter backend start"]

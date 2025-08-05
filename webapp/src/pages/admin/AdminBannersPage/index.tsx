@@ -9,9 +9,9 @@ import { Segment } from '../../../components/Segment'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { trpc } from '../../../lib/trpc'
 import commonCss from '../../../styles/adminTable.module.scss'
+import { BannerModal } from '../PageModal/BannerModal'
+import { DeleteBannerModal } from '../PageModal/DeleteBannerModal'
 
-import { BannerModal } from './BannerModal'
-import { DeleteBannerModal } from './DeleteBannerModal'
 import css from './index.module.scss'
 
 export const AdminBannersPage = withPageWrapper({

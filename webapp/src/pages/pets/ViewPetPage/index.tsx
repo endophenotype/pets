@@ -94,7 +94,7 @@ export const ViewPetPage = withPageWrapper({
   showLoaderOnFetching: false,
   title: ({ pet }) => pet.name,
 })(({ pet, me }) => {
-  if (pet.blockedAt && !(me?.permissions.includes('BLOCK_PERSONS') || me?.permissions.includes('ALL'))) {
+  if (pet.blockedAt && !(me?.permissions.includes('BLOCK_PETS') || me?.permissions.includes('ALL'))) {
     return <Alert color="red">Pet is blocked by administrator</Alert>
   }
 

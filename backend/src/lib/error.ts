@@ -10,10 +10,10 @@ export class ExpectedError extends Error {
 
 export type ExpectedErrorCode =
   | 'NOT_FOUND'
-  | 'PERSON_BLOCKED'
+  | 'PET_BLOCKED'
   | 'NO_PERMISSION'
   | 'STATIC_PAGE_NOT_FOUND'
-  | 'PERSON_ALREADY_EXISTS'
+  | 'PET_ALREADY_EXISTS'
   | 'USER_ALREADY_EXISTS'
   | 'WRONG_PASSWORD'
   | 'WRONG_NICK_OR_PASSWORD'

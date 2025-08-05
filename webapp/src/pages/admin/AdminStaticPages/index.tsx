@@ -8,9 +8,9 @@ import { Segment } from '../../../components/Segment'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { trpc } from '../../../lib/trpc'
 import commonCss from '../../../styles/adminTable.module.scss'
+import { DeleteStaticPageModal } from '../PageModal/DeleteStaticPageModal'
+import { StaticPageModal } from '../PageModal/StaticPageModal'
 
-import { DeleteStaticPageModal } from './DeleteStaticPageModal'
-import { StaticPageModal } from './StaticPageModal'
 import css from './index.module.scss'
 
 export const AdminStaticPages = withPageWrapper({

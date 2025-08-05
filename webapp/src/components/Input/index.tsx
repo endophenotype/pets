@@ -9,6 +9,7 @@ export const Input = ({
   formik,
   maxWidth,
   type = 'text',
+  className,
 }: {
   name: string
   label: string
@@ -16,6 +17,7 @@ export const Input = ({
   formik: FormikProps<any>
   maxWidth?: number | string
   type?: 'text' | 'password'
+  className?: string
 }) => {
   const error = formik.errors[name] as string | undefined
   const touched = formik.touched[name]
@@ -23,7 +25,7 @@ export const Input = ({
   const disabled = formik.isSubmitting
 
   return (
-    <div className={cn({ [css.field]: true, [css.disabled]: disabled })}>
+    <div className={cn({ [css.field]: true, [css.disabled]: disabled }, className)}>
       <label className={css.label} htmlFor={name}>
         {label}
       </label>

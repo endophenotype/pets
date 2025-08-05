@@ -8,15 +8,15 @@ export const hasPermission = (user: MaybeUser, permission: UserPermission) => {
 }
 
 export const canBlockPets = (user: MaybeUser) => {
-  return hasPermission(user, 'BLOCK_PERSONS')
+  return hasPermission(user, 'BLOCK_PETS')
 }
 
 export const canUnblockPet = (user: MaybeUser) => {
-  return hasPermission(user, 'BLOCK_PERSONS')
+  return hasPermission(user, 'BLOCK_PETS')
 }
 
 export const canApprovePet = (user: MaybeUser) => {
-  return hasPermission(user, 'APPROVE_PERSON')
+  return hasPermission(user, 'APPROVE_PET')
 }
 
 export const canEditPet = (user: MaybeUser, pet: MaybePet) => {

@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import 'easymde/dist/easymde.min.css'
-import Modal from 'react-modal'
 import SimpleMDE from 'react-simplemde-editor'
 import { z } from 'zod'
 
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
+import { Modal } from '../../../components/Modal'
 import { useForm } from '../../../lib/form'
 import { trpc } from '../../../lib/trpc'
 
-import css from './StaticPageModal.module.scss'
+import css from './PageModal.module.scss'
 
 type Props = {
   isOpen: boolean
@@ -65,11 +65,10 @@ export const StaticPageModal = ({ isOpen, onClose, staticPage }: Props) => {
   }, [isOpen, staticPage])
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} contentLabel="Static Page Modal">
-      <h2>{staticPage ? 'Edit Static Page' : 'Create New Static Page'}</h2>
+    <Modal isOpen={isOpen} onClose={onClose} title={staticPage ? 'Edit Static Page' : 'Create New Static Page'}>
       <form onSubmit={formik.handleSubmit}>
-        <Input label="Title" name="title" formik={formik} />
-        <Input label="Slug" name="slug" formik={formik} />
+        <Input className={css.modalInput} label="Title" name="title" formik={formik} />
+        <Input className={css.modalInput} label="Slug" name="slug" formik={formik} />
         <SimpleMDE value={formik.values.content} onChange={(value) => formik.setFieldValue('content', value)} />
         <Button type="submit" disabled={formik.isSubmitting}>
           {staticPage ? 'Update' : 'Create'}

@@ -21,7 +21,10 @@ type Pet = {
 export const ReorderPetsPage = () => {
   // Получаем всех Pet (без пагинации)
   const queryClient = useQueryClient()
-  const { data, isLoading, isError, error } = trpc.getPets.useQuery({ limit: 1000 }, { refetchOnWindowFocus: false })
+  const { data, isLoading, isError, error } = trpc.getPets.useQuery(
+    { limit: 1000, status: 'approved', sort: { serialNumber: 'asc' } },
+    { refetchOnWindowFocus: false }
+  )
   const [pets, setPets] = useState<Pet[]>([])
 
   useEffect(() => {
@@ -63,7 +66,7 @@ export const ReorderPetsPage = () => {
   }
 
   return (
-    <Segment title="Изменение порядка питомцев" className={css.segment}>
+    <Segment title="Изменение порядка моделей" className={css.segment}>
       <AdminMenu />
       {isLoading ? (
         <Loader type="section" />

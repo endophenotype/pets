@@ -13,16 +13,16 @@ export const createPetTrpcRoute = trpcLoggedProcedure.input(zCreatePetTrpcInput)
     },
   })
   if (exPet) {
-    throw new ExpectedError('PERSON_ALREADY_EXISTS', 'Pet with this nick already exists')
+    throw new ExpectedError('PET_ALREADY_EXISTS', 'Pet with this nick already exists')
   }
-  const minSerialNumberPet = await ctx.prisma.pet.findFirst({
+  const maxSerialNumberPet = await ctx.prisma.pet.findFirst({
     orderBy: {
-      serialNumber: 'asc',
+      serialNumber: 'desc',
     },
     take: 1,
   })
 
-  const serialNumber = minSerialNumberPet ? minSerialNumberPet.serialNumber - 1 : 1
+  const serialNumber = maxSerialNumberPet ? maxSerialNumberPet.serialNumber + 1 : 1
 
   const pet = await ctx.prisma.pet.create({
     data: { ...input, authorId: ctx.me.id, serialNumber },

@@ -21,9 +21,9 @@ model User {
 }
 
 enum UserPermission {
-  BLOCK_PERSONS
+  BLOCK_PETS
   ALL
-  APPROVE_PERSON
+  APPROVE_PET
   EDIT_STATIC_PAGES
   MANAGE_BANNERS
 }

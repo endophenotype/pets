@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  type CloudinaryUploadPresetName,
-  type CloudinaryUploadTypeName,
-  getCloudinaryUploadUrl,
-} from '@pets/shared/src/cloudinary'
+import { type CloudinaryUploadPresetName, type CloudinaryUploadTypeName } from '@pets/shared/src/cloudinary'
 import cn from 'classnames'
 import { type FormikProps } from 'formik'
 import { useRef, useState } from 'react'
 
 import { Button } from '../Button'
-import { Icon } from '../Icon'
+import { ReorderablePreviews } from '../ReorderablePreviews'
 import { useUploadToCloudinary } from '../UploadToCloudinary'
 
 import css from './index.module.scss'
@@ -27,7 +23,7 @@ export const UploadsToCloudinary = <TTypeName extends CloudinaryUploadTypeName>(
   type: TTypeName
   preset: CloudinaryUploadPresetName<TTypeName>
 }) => {
-  const value = formik.values[name] as string[]
+  const value = (formik.values[name] || []) as string[]
   const error = formik.errors[name] as string | undefined
   const touched = formik.touched[name] as boolean
   const invalid = touched && !!error
@@ -78,27 +74,22 @@ export const UploadsToCloudinary = <TTypeName extends CloudinaryUploadTypeName>(
         {label}
       </label>
       {!!value?.length && (
-        <div className={css.previews}>
-          {value.map((publicId) => (
-            <div key={publicId} className={css.previewPlace}>
-              <button
-                type="button"
-                className={css.delete}
-                onClick={() => {
-                  void formik.setFieldValue(
-                    name,
-                    value.filter((deletedPublicId) => deletedPublicId !== publicId)
-                  )
-                }}
-              >
-                <Icon className={css.deleteIcon} name="delete" />
-              </button>
-              <img className={css.preview} alt="" src={getCloudinaryUploadUrl(publicId, type, preset)} />
-            </div>
-          ))}
-        </div>
+        <ReorderablePreviews
+          type={type}
+          preset={preset}
+          value={value}
+          onDelete={(publicId) => {
+            void formik.setFieldValue(
+              name,
+              value.filter((deletedPublicId) => deletedPublicId !== publicId)
+            )
+          }}
+          onReorder={(newValue) => {
+            void formik.setFieldValue(name, newValue)
+          }}
+        />
       )}
-      <div className={css.buttons}>
+      <div className={css.button}>
         <Button
           type="button"
           onClick={() => inputEl.current?.click()}

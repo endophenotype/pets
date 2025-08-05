@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "public"."UserPermission" AS ENUM ('BLOCK_PERSONS', 'ALL', 'APPROVE_PERSON', 'EDIT_STATIC_PAGES', 'MANAGE_BANNERS');
+CREATE TYPE "public"."UserPermission" AS ENUM ('BLOCK_PETS', 'ALL', 'APPROVE_PET', 'EDIT_STATIC_PAGES', 'MANAGE_BANNERS');
 
 -- CreateEnum
 CREATE TYPE "public"."BannerPosition" AS ENUM ('LEFT', 'RIGHT');

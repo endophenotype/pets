@@ -16,17 +16,26 @@
   background: white;
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 800px;
+  max-height: 90vh;
   width: 90%;
+  overflow-y: auto;
   box-shadow: 0 4px 8px rgb(0, 0, 0, 0.2);
   outline: none;
+
+  /* Скрыть стандартный скроллбар, но оставить прокрутку */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.modal::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }

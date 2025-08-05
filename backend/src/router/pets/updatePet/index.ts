@@ -18,7 +18,7 @@ export const updatePetTrpcRoute = trpcLoggedProcedure.input(zUpdatePetTrpcInput)
     throw new Error('NOT_FOUND')
   }
   if (!canEditPet(ctx.me, pet)) {
-    throw new Error('NOT_YOUR_PERSON')
+    throw new Error('NOT_YOUR_PET')
   }
   if (pet.nick !== input.nick) {
     const exPet = await ctx.prisma.pet.findUnique({
@@ -27,7 +27,7 @@ export const updatePetTrpcRoute = trpcLoggedProcedure.input(zUpdatePetTrpcInput)
       },
     })
     if (exPet) {
-      throw new ExpectedError('PERSON_ALREADY_EXISTS', 'Pet with this nick already exists')
+      throw new ExpectedError('PET_ALREADY_EXISTS', 'Pet with this nick already exists')
     }
   }
   await ctx.prisma.pet.update({

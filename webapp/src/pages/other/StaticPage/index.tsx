@@ -1,5 +1,7 @@
 import DOMPurify from 'dompurify'
-import React, { useMemo } from 'react'
+import parse from 'html-react-parser'
+import { marked } from 'marked'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Loader } from '../../../components/Loader'
@@ -13,7 +15,7 @@ export const StaticPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const { data, isLoading, error } = trpc.staticPages.getStaticPage.useQuery({ slug: slug || '' }, { enabled: !!slug })
 
-  const sanitizedContent = useMemo(() => (data?.content ? DOMPurify.sanitize(data.content) : ''), [data?.content])
+  const sanitizedContent = data?.content ? DOMPurify.sanitize(marked(data.content) as string) : ''
 
   if (isLoading) {
     return <Loader type="page" />
@@ -26,7 +28,7 @@ export const StaticPage: React.FC = () => {
   return (
     <div className={css.wrapper}>
       <Segment title={data.title} className={css.title}>
-        <div className={css.content} dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+        <div className={css.content}>{parse(sanitizedContent)}</div>
       </Segment>
     </div>
   )

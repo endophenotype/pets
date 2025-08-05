@@ -19,9 +19,9 @@ export const getPetTrpcRoute = trpcLoggedProcedure.input(zGetPetTrpcInput).query
       },
     },
   })
-  const isAdmin = ctx.me && (ctx.me.permissions.includes('BLOCK_PERSONS') || ctx.me.permissions.includes('ALL'))
+  const isAdmin = ctx.me && (ctx.me.permissions.includes('BLOCK_PETS') || ctx.me.permissions.includes('ALL'))
   if (rawPet?.blockedAt && !isAdmin) {
-    throw new ExpectedError('PERSON_BLOCKED', 'Pet is blocked by administrator')
+    throw new ExpectedError('PET_BLOCKED', 'Pet is blocked by administrator')
   }
   if (rawPet?.approvedAt === null && !isAdmin) {
     throw new ExpectedError('NOT_FOUND', 'Pet not found')

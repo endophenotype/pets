@@ -1,9 +1,8 @@
-import Modal from 'react-modal'
-
 import { Button } from '../../../components/Button'
+import { Modal } from '../../../components/Modal'
 import { trpc } from '../../../lib/trpc'
 
-import css from './StaticPageModal.module.scss'
+import css from './PageModal.module.scss'
 
 type Props = {
   isOpen: boolean
@@ -26,9 +25,8 @@ export const DeleteStaticPageModal = ({ isOpen, onClose, staticPage }: Props) =>
   }
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} contentLabel="Delete Static Page Modal">
-      <h2>Delete Static Page</h2>
-      <p>
+    <Modal isOpen={isOpen} onClose={onClose} title="Delete Static Page">
+      <p className={css.modalText}>
         Are you sure you want to delete the page `<strong>{staticPage?.title}</strong>`?
       </p>
       <Button onClick={handleDelete} color="red" disabled={deleteMutation.isLoading}>

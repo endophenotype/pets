@@ -3,9 +3,8 @@ import { adminProcedure } from '../../../lib/trpc'
 import { zReorderPetsInput } from './input'
 
 export const reorderPetsTrpcRoute = adminProcedure.input(zReorderPetsInput).mutation(async ({ input, ctx }) => {
-  // Собираем все ID и новые serialNumber из входных данных
-  const updates = new Map(input.map((item) => [item.id, item.serialNumber]))
-  const petIds = Array.from(updates.keys())
+  // Собираем все ID из входных данных
+  const petIds = input.map((item) => item.id)
 
   await ctx.prisma.$transaction(async (prisma) => {
     // Шаг 1: Временно устанавливаем serialNumber для всех затрагиваемых Pet на уникальные отрицательные значения

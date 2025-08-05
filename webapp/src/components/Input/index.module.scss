@@ -1,0 +1,8 @@
+@use '../../styles/mixins' as mixins;
+@use '../../styles/vars' as vars;
+
+@use '../../styles/field';
+
+.field {
+  @include field.field;
+}

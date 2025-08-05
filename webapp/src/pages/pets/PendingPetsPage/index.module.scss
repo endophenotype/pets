@@ -1,0 +1,26 @@
+@use '../../../styles/mixins' as mixins;
+@use '../../../styles/vars' as vars;
+
+.filter {
+  margin-bottom: 20px;
+}
+
+.pets {
+  .pet {
+    padding: 20px;
+    border: 1px solid vars.$black;
+    border-radius: 10px;
+
+    & + .pet {
+      margin-top: 20px;
+    }
+
+    .petLink {
+      @include mixins.link;
+    }
+  }
+
+  .more {
+    margin-top: 15px;
+  }
+}

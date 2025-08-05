@@ -1,0 +1,73 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String           @id @default(uuid())
+  nick        String           @unique
+  email       String           @unique
+  name        String           @default("")
+  avatar      String?
+  password    String
+  createdAt   DateTime         @default(now())
+  pets     Pet[]
+  permissions UserPermission[]
+}
+
+enum UserPermission {
+  BLOCK_PERSONS
+  ALL
+  APPROVE_PERSON
+  EDIT_STATIC_PAGES
+  MANAGE_BANNERS
+}
+
+model Pet {
+  id           String    @id @default(uuid())
+  nick         String    @unique
+  serialNumber Int       @unique
+  name         String
+  text         String
+  images       String[]
+  createdAt    DateTime  @default(now())
+  authorId     String
+  author       User      @relation(fields: [authorId], references: [id])
+  blockedAt    DateTime?
+  approvedAt    DateTime?
+  price        String?
+  groupLink    String?
+  contactLink  String    @default("")
+
+  @@index([approvedAt, blockedAt, createdAt(sort: Desc)])
+  @@index([approvedAt, blockedAt, serialNumber(sort: Desc)])
+}
+
+model StaticPage {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id        String   @id @default(uuid())
+  image     String
+  text      String
+  link      String
+  position  BannerPosition
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum BannerPosition {
+  LEFT
+  RIGHT
+}

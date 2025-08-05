@@ -1,0 +1,25 @@
+@use '../../styles/mixins' as mixins;
+@use '../../styles/vars' as vars;
+
+$breakpoint: '<=900px';
+
+.menu {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+
+  @include mixins.media($breakpoint) {
+    flex-flow: column nowrap;
+    align-items: center;
+  }
+
+  a {
+    color: vars.$blue;
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}

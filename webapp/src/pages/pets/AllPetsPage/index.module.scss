@@ -1,0 +1,181 @@
+@use 'sass:color';
+@use '../../../styles/mixins' as mixins;
+@use '../../../styles/vars' as vars;
+
+.title {
+  :global(h1),
+  :global(h2) {
+    text-align: center;
+    color: vars.$white;
+  }
+}
+
+.filter {
+  margin-bottom: 20px;
+}
+
+.pets {
+  .petsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+
+  .pet {
+    position: relative;
+    width: 264px;
+    height: 380px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+
+    .petImage,
+    .petImagePlaceholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .petImagePlaceholder {
+      background-color: vars.$transparent-green;
+    }
+
+    .sliderControls {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      z-index: 1;
+
+      .leftControl,
+      .rightControl {
+        width: 50%;
+        height: 100%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        .arrow {
+          color: white;
+          font-size: 2em;
+          text-shadow: 0 0 5px black;
+        }
+      }
+
+      &:hover {
+        .leftControl,
+        .rightControl {
+          opacity: 1;
+        }
+      }
+    }
+
+    .petOverlay {
+      position: relative;
+      width: 100%;
+      padding: 10px;
+      background: rgb(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      color: white;
+      text-align: center;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100px;
+    }
+
+    .petName {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    .petLink {
+      @include mixins.link;
+      padding: 6px 12px;
+      background-color: vars.$white;
+      color: #000;
+      border-radius: 5px;
+      text-decoration: none;
+      margin: 5px auto 0;
+      width: fit-content;
+
+      &:hover {
+        background-color: color.adjust(vars.$white, $lightness: -10%);
+      }
+    }
+
+    .sliderDots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      min-height: 8px;
+      margin-top: 8px;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255, 0.5);
+        transition: background-color 0.3s;
+      }
+
+      .activeDot {
+        background-color: white;
+      }
+    }
+  }
+
+  .more {
+    margin-top: 15px;
+  }
+}
+
+@media (width <= 1500px) {
+  .pets .pet {
+    flex: 0 0 calc((100% - 80px) / 5); /* 5 элементов на строку, 4 промежутка по 20px */
+  }
+}
+
+@media (width <= 1200px) {
+  .pets .pet {
+    flex: 0 0 calc((100% - 60px) / 4); /* 4 элемента на строку, 3 промежутка по 20px */
+  }
+}
+
+@media (width <= 992px) {
+  .pets .pet {
+    flex: 0 0 calc((100% - 40px) / 3); /* 3 элемента на строку, 2 промежутка по 20px */
+  }
+}
+
+@media (width <= 768px) {
+  .pets .pet {
+    flex: 0 0 calc((100% - 20px) / 2); /* 2 элемента на строку, 1 промежуток по 20px */
+  }
+}
+
+@media (width <= 576px) {
+  .pets {
+    .petsGrid {
+      justify-content: center;
+    }
+
+    .pet {
+      flex: 0 0 100%; /* 1 элемент на строку */
+      justify-content: center;
+      max-width: 300px;
+    }
+  }
+}

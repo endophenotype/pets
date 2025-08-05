@@ -1,0 +1,65 @@
+@use '../../styles/mixins' as mixins;
+@use '../../styles/vars' as vars;
+
+$breakpoint: '<=900px';
+
+.footer {
+  flex: 0 0 auto;
+  padding: 20px 30px;
+  border-top: 1px solid vars.$black;
+  background: #09251d;
+  color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 20px;
+
+  .footerColumns {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 100px;
+    width: 100%;
+    max-width: 1000px;
+
+    @include mixins.media($breakpoint) {
+      flex-flow: column nowrap;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  .footerMenu {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .menuItem {
+    &:not(:first-child) {
+      margin-top: 0;
+      @include mixins.media($breakpoint) {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .menuLink {
+    @include mixins.link;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  .footerText {
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .footerLink {
+    @include mixins.link;
+  }
+}

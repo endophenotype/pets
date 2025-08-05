@@ -1,0 +1,36 @@
+@use '../../styles/vars' as vars;
+.field {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: vars.$blue;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgb(0, 123, 255, 0.25);
+  }
+}
+
+.invalid .select {
+  border-color: vars.$red;
+}
+
+.error {
+  color: vars.$red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}

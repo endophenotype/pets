@@ -1,0 +1,29 @@
+@use '../../../styles/vars';
+@use '../../../styles/mixins';
+
+.wrapper {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 40px;
+  background-color: vars.$white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
+
+  @include mixins.media('<tablet') {
+    padding: 20px;
+    margin: 10px;
+  }
+}
+
+.content {
+  font-family: vars.$defaultFontFamily;
+  font-size: vars.$defaultFontSize;
+  white-space: pre-wrap;
+}
+
+.title {
+  :global(h1),
+  :global(h2) {
+    text-align: center;
+  }
+}

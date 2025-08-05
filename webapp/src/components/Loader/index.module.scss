@@ -1,0 +1,23 @@
+@use '../../styles/vars' as vars;
+@use '../../styles/mixins' as mixins;
+
+.loader {
+  &.type-page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh - 250px);
+    height: 100%;
+    @include mixins.loader($borderWidth: 5px, $size: 60px, $color: vars.$gray);
+  }
+
+  &.type-section {
+    position: relative;
+    display: block;
+    height: 80px;
+    width: 100%;
+    @include mixins.loader($borderWidth: 5px, $size: 60px, $color: vars.$gray);
+  }
+}

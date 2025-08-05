@@ -1,0 +1,73 @@
+@use 'sass:color';
+@use '../../styles/vars' as vars;
+@use '../../styles/mixins' as mixins;
+
+.button {
+  padding: 8px 15px;
+  color: vars.$white;
+  border: none;
+  font-weight: bold;
+  border-radius: vars.$borderRadiusSmall;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+
+  &.color-green {
+    background-color: vars.$green;
+
+    &:hover {
+      background-color: #21b821;
+    }
+
+    &:active {
+      background-color: #39d039;
+    }
+  }
+
+  &.color-red {
+    background-color: vars.$red;
+
+    &:hover {
+      background-color: color.scale(vars.$red, $lightness: 10%);
+    }
+
+    &:active {
+      background-color: color.scale(vars.$red, $lightness: 30%);
+    }
+  }
+
+  &.color-white {
+    background-color: #ffffff86;
+    color: vars.$black;
+
+    &:hover {
+      background-color: color.scale(vars.$white, $lightness: -5%);
+    }
+
+    &:active {
+      background-color: color.scale(vars.$white, $lightness: -10%);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background-color: #929292;
+    color: #d9d9d9;
+  }
+
+  &.loading {
+    @include mixins.loader($borderWidth: 3px, $size: 20px, $color: vars.$white);
+
+    .text {
+      opacity: 0;
+    }
+  }
+}
+
+.buttons {
+  margin-right: -5px;
+
+  & > * {
+    margin-right: 5px;
+  }
+}

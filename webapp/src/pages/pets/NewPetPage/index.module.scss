@@ -1,0 +1,6 @@
+@use '../../../styles/mixins' as mixins;
+@use '../../../styles/vars' as vars;
+
+.title {
+  @include mixins.h1;
+}

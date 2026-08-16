@@ -9,17 +9,14 @@
       "maxDuration": 30
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/trpc/(.*)",
-      "dest": "/api/trpc/$1"
+      "source": "/trpc/:path*",
+      "destination": "/api/trpc/:path*"
     },
     {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/((?!api/.*).*)",
+      "destination": "/index.html"
     }
   ]
 }

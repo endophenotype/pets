@@ -26,9 +26,14 @@ if (backendEnvFilePath) {
   dotenv.config({ path: `${backendEnvFilePath}.${process.env.NODE_ENV}`, override: true })
 }
 
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL
+process.env.HOST_ENV ||= process.env.VERCEL ? 'production' : undefined
+process.env.SOURCE_VERSION ||= process.env.VERCEL_GIT_COMMIT_SHA || 'unknown'
+process.env.WEBAPP_URL ||= vercelUrl ? `https://${vercelUrl}` : undefined
+
 const zEnv = z.object({
   NODE_ENV: z.enum(['test', 'development', 'production']),
-  PORT: zEnvNonemptyTrimmed,
+  PORT: zEnvNonemptyTrimmed.default('3000'),
   HOST_ENV: zEnvHost,
   DATABASE_URL: zEnvNonemptyTrimmed.refine((val) => {
     if (process.env.NODE_ENV !== 'test') {
@@ -49,7 +54,7 @@ const zEnv = z.object({
       (val) => process.env.HOST_ENV === 'local' || process.env.NODE_ENV !== 'production' || (!!val && val.length > 0),
       'Required on not local host on production'
     ),
-  BACKEND_SENTRY_DSN: zEnvNonemptyTrimmedRequiredOnNotLocal,
+  BACKEND_SENTRY_DSN: zEnvNonemptyTrimmed.optional(),
   SOURCE_VERSION: zEnvNonemptyTrimmedRequiredOnNotLocal,
   CLOUDINARY_API_KEY: zEnvNonemptyTrimmedRequiredOnNotLocal,
   CLOUDINARY_API_SECRET: zEnvNonemptyTrimmedRequiredOnNotLocal,

@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "vite",
     "test": "dotenv -e .env.test -e .env jest",
-    "build": "tsc -b && vite build",
+    "build": "node ../node_modules/typescript/bin/tsc -b && vite build",
     "preview": "vite preview",
-    "types": "tsc --noEmit --project ./tsconfig.app.json && tsc --noEmit --project ./tsconfig.node.json",
+    "types": "node ../node_modules/typescript/bin/tsc --noEmit --project ./tsconfig.app.json && node ../node_modules/typescript/bin/tsc --noEmit --project ./tsconfig.node.json",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts --ext .tsx .",
     "stylelint": "stylelint --cache --cache-location ./node_modules/.cache/.stylelintcache src/**/*.scss",
     "stylecheck": "sass -q --load-path=node_modules ./src:./node_modules/.cache/.stylecheckcache",

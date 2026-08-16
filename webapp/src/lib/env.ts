@@ -7,9 +7,9 @@ export const zEnv = z.object({
   SOURCE_VERSION: zEnvNonemptyTrimmedRequiredOnNotLocal,
   VITE_BACKEND_TRPC_URL: zEnvNonemptyTrimmed,
   VITE_WEBAPP_URL: zEnvNonemptyTrimmed,
-  VITE_WEBAPP_SENTRY_DSN: zEnvNonemptyTrimmedRequiredOnNotLocal,
+  VITE_WEBAPP_SENTRY_DSN: zEnvNonemptyTrimmed.optional(),
   VITE_CLOUDINARY_CLOUD_NAME: zEnvNonemptyTrimmed,
-  VITE_MIXPANEL_API_KEY: zEnvNonemptyTrimmedRequiredOnNotLocal,
+  VITE_MIXPANEL_API_KEY: zEnvNonemptyTrimmed.optional(),
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

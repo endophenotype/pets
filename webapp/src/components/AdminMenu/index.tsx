@@ -6,7 +6,7 @@ import { trpc } from '../../lib/trpc'
 import styles from './index.module.scss'
 
 export const AdminMenu = () => {
-  const { data } = trpc.getMe.useQuery()
+  const { data } = trpc.getMe.useQuery(undefined)
   const me = data?.me
 
   const canViewBlock = me?.permissions.includes('BLOCK_PETS') || me?.permissions.includes('ALL')

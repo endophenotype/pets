@@ -23,7 +23,7 @@ export const AdminBannersPage = withPageWrapper({
   const [selectedBanner, setSelectedBanner] = useState<TrpcRouterOutput['banners']['getBanners'][number] | undefined>(
     undefined
   )
-  const { data: banners, isLoading, error, refetch } = trpc.banners.getBanners.useQuery()
+  const { data: banners, isLoading, error, refetch } = trpc.banners.getBanners.useQuery(undefined)
 
   if (isLoading) {
     return <Loader type="page" />

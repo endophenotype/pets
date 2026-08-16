@@ -18,10 +18,9 @@ export const initSentry = () => {
       normalizeDepth: 10,
       // RewriteFrames помечен как устаревший в Sentry 7.x, но нужен для корректных путей стека.
       integrations: [
-        // @ts-expect-error RewriteFrames is deprecated but still works as Integration
         new RewriteFrames({
           root: path.resolve(__dirname, '../../..'),
-        }),
+        }) as never,
       ],
     })
   }

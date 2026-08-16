@@ -14,8 +14,7 @@ const AppReactContext = createContext<AppContext>({
 })
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
-  // @ts-expect-error Adding staleTime to prevent unnecessary refetching
-  const { data, error, isLoading, isFetching, isError } = trpc.getMe.useQuery({ staleTime: Infinity })
+  const { data, error, isLoading, isFetching, isError } = trpc.getMe.useQuery(undefined, { staleTime: Infinity })
   const value = useMemo(() => ({ me: data?.me || null }), [data])
   return (
     <AppReactContext.Provider value={value}>

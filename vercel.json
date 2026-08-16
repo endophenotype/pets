@@ -1,0 +1,22 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "corepack enable && pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm vercel-build",
+  "outputDirectory": "webapp/dist",
+  "functions": {
+    "api/trpc/[...trpc].ts": {
+      "includeFiles": "backend/src/emails/dist/**",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/trpc/:path*",
+      "destination": "/api/trpc/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

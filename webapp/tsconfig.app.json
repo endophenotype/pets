@@ -9,6 +9,12 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@pets/backend/*": ["../backend/*"],
+      "@pets/shared/*": ["../shared/*"],
+      "@pets/webapp/*": ["./*"]
+    },
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",

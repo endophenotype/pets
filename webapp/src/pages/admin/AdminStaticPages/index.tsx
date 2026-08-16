@@ -28,7 +28,7 @@ export const AdminStaticPages = withPageWrapper({
       }
     | undefined
   >(undefined)
-  const { data: staticPages, isLoading, error, refetch } = trpc.staticPages.getStaticPages.useQuery()
+  const { data: staticPages, isLoading, error, refetch } = trpc.staticPages.getStaticPages.useQuery(undefined)
 
   if (isLoading) {
     return <Loader type="page" />

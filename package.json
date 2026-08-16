@@ -2,6 +2,10 @@
   "name": "pets",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "b": "pnpm --filter @pets/backend",
     "w": "pnpm --filter @pets/webapp",
@@ -9,6 +13,7 @@
     "dev": "pnpm -r --parallel dev",
     "test": "pnpm -r test",
     "build": "pnpm w build && pnpm b build",
+    "vercel-build": "pnpm b pgc && pnpm --filter @pets/backend exec prisma migrate deploy && pnpm b build-emails && pnpm w build",
     "types": "concurrently \"pnpm b types\" \"pnpm w types\" \"pnpm sh types\"",
     "lint": "concurrently \"pnpm b lint\" \"pnpm w lint\" \"pnpm sh lint\"",
     "prettify": "pnpm -r --parallel prettify",
@@ -24,6 +29,7 @@
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@types/jest": "^30.0.0",
+    "@types/node": "^22.15.23",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.35.0",
     "concurrently": "^9.1.2",
@@ -60,5 +66,14 @@
     "@trpc/client": "10.37.0",
     "@trpc/react-query": "10.37.0",
     "vite": "^7.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "9.27.0",
+      "@trpc/server": "10.37.0",
+      "@trpc/client": "10.37.0",
+      "@trpc/react-query": "10.37.0",
+      "vite": "^7.0.5"
+    }
   }
 }

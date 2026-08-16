@@ -101,7 +101,7 @@ export const ViewPetPage = withPageWrapper({
   const sanitizedText = useMemo(() => (pet.text ? DOMPurify.sanitize(pet.text, { ALLOWED_TAGS: [] }) : ''), [pet.text])
   const [modalIndex, setModalIndex] = React.useState<number | null>(null)
 
-  const { data: bannersData } = trpc.banners.getBanners.useQuery()
+  const { data: bannersData } = trpc.banners.getBanners.useQuery(undefined)
   const leftBanner = bannersData?.find((banner) => banner.position === 'LEFT')
   const rightBanner = bannersData?.find((banner) => banner.position === 'RIGHT')
 

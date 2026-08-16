@@ -51,7 +51,7 @@ export const adminProcedure = trpc.procedure.use(
 )
 
 export const trpcLoggedProcedure = trpc.procedure.use(
-  trpc.middleware(async ({ path, type, next, ctx, rawInput }) => {
+  trpc.middleware(async ({ path, type, next, ctx }) => {
     const start = Date.now()
     const result = await next()
     const durationMs = Date.now() - start
@@ -60,7 +60,6 @@ export const trpcLoggedProcedure = trpc.procedure.use(
       type,
       userId: ctx.me?.id || null,
       durationMs,
-      rawInput: rawInput || null,
     }
     if (result.ok) {
       logger.info(`trpc:${type}:success`, 'Successfull request', { ...meta, output: result.data })
@@ -72,16 +71,16 @@ export const trpcLoggedProcedure = trpc.procedure.use(
 )
 
 export const applyTrpcToExpressApp = async (expressApp: Express, appContext: AppContext, trpcRouter: TrpcRouter) => {
-  expressApp.use(
-    '/trpc',
-    trpcExpress.createExpressMiddleware({
-      router: trpcRouter,
-      createContext: getCreateTrpcContext(appContext),
-    })
-  )
+  const trpcMiddleware = trpcExpress.createExpressMiddleware({
+    router: trpcRouter,
+    createContext: getCreateTrpcContext(appContext),
+  })
+
+  expressApp.use('/trpc', trpcMiddleware)
+  expressApp.use('/api/trpc', trpcMiddleware)
 
   if (process.env.NODE_ENV !== 'production') {
-    const { expressHandler } = await import('trpc-playground/handlers/express')
+    const { expressHandler } = await import('trpc-playground/handlers/express' as string)
     expressApp.use(
       '/trpc-playground',
       await expressHandler({

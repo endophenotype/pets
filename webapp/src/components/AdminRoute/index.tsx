@@ -4,7 +4,7 @@ import { trpc } from '../../lib/trpc'
 import { Loader } from '../Loader'
 
 export const AdminRoute = () => {
-  const { data, isLoading } = trpc.getMe.useQuery()
+  const { data, isLoading } = trpc.getMe.useQuery(undefined)
 
   if (isLoading) {
     return <Loader type="page" />

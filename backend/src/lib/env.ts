@@ -31,6 +31,12 @@ process.env.HOST_ENV ||= process.env.VERCEL ? 'production' : undefined
 process.env.SOURCE_VERSION ||= process.env.VERCEL_GIT_COMMIT_SHA || 'unknown'
 process.env.WEBAPP_URL ||= vercelUrl ? `https://${vercelUrl}` : undefined
 
+for (const [key, value] of Object.entries(process.env)) {
+  if (typeof value === 'string') {
+    process.env[key] = value.trim()
+  }
+}
+
 const zEnv = z.object({
   NODE_ENV: z.enum(['test', 'development', 'production']),
   PORT: zEnvNonemptyTrimmed.default('3000'),

@@ -15,6 +15,7 @@
     "pmt": "dotenv -e ./.env.test prisma migrate deploy",
     "pmp": "dotenv -e ./.env.production prisma migrate deploy",
     "pgc": "prisma generate",
+    "reset-admin-password": "ts-node ./src/scripts/resetAdminPassword.ts",
     "types": "node ../node_modules/typescript/bin/tsc --noEmit --project ./tsconfig.json",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts .",
     "prettify": "prettier --loglevel warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",

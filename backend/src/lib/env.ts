@@ -51,6 +51,7 @@ const zEnv = z.object({
   }, `Data base name should ends with "-test" on test environment`),
   JWT_SECRET: zEnvNonemptyTrimmed,
   PASSWORD_SALT: zEnvNonemptyTrimmed,
+  PASSWORD_SALT_PREVIOUS: zEnvNonemptyTrimmed.optional(),
   INITIAL_ADMIN_PASSWORD: zEnvNonemptyTrimmed,
   WEBAPP_URL: zEnvNonemptyTrimmed,
   DEBUG: z

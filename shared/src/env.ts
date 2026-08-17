@@ -6,8 +6,15 @@ declare global {
   const webappEnvFromBackend: Record<string, string> | undefined
 }
 const windowEnv = typeof webappEnvFromBackend !== 'undefined' ? webappEnvFromBackend : {}
+
+const processEnv = typeof process !== 'undefined' ? process.env : {}
 const getSharedEnvVariable = (key: string) =>
-  windowEnv[`VITE_${key}`] || windowEnv[key] || process.env[`VITE_${key}`] || process.env[key]
+  windowEnv[`VITE_${key}`] ||
+  windowEnv[key] ||
+  processEnv[`VITE_${key}`] ||
+  processEnv[key] ||
+  (key === 'WEBAPP_URL' && typeof window !== 'undefined' ? window.location.origin : undefined) ||
+  (key === 'CLOUDINARY_CLOUD_NAME' ? 'db8wupgxo' : undefined)
 
 const sharedEnvRaw = {
   CLOUDINARY_CLOUD_NAME: getSharedEnvVariable('CLOUDINARY_CLOUD_NAME'),

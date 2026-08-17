@@ -14,11 +14,11 @@ const AppReactContext = createContext<AppContext>({
 })
 
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const { data, error, isLoading, isFetching, isError } = trpc.getMe.useQuery(undefined, { staleTime: Infinity })
+  const { data, error, isLoading, isError } = trpc.getMe.useQuery(undefined, { staleTime: Infinity })
   const value = useMemo(() => ({ me: data?.me || null }), [data])
   return (
     <AppReactContext.Provider value={value}>
-      {isLoading || isFetching ? <Loader type="page" /> : isError ? <p>Error: {error.message}</p> : children}
+      {isLoading ? <Loader type="page" /> : isError ? <p>Error: {error.message}</p> : children}
     </AppReactContext.Provider>
   )
 }

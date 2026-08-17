@@ -16,14 +16,27 @@ const findEnvFilePath = (dir: string, pathPart: string): string | null => {
   return findEnvFilePath(path.dirname(dir), pathPart)
 }
 const webappEnvFilePath = findEnvFilePath(__dirname, 'webapp/.env')
+const initialEnvKeys = new Set(Object.keys(process.env))
+const applyEnvFile = (envFilePath: string) => {
+  const parsedEnv = dotenv.config({ path: envFilePath }).parsed
+  if (!parsedEnv) {
+    return
+  }
+  for (const [key, value] of Object.entries(parsedEnv)) {
+    if (!initialEnvKeys.has(key)) {
+      process.env[key] = value
+    }
+  }
+}
+
 if (webappEnvFilePath) {
-  dotenv.config({ path: webappEnvFilePath, override: true })
-  dotenv.config({ path: `${webappEnvFilePath}.${process.env.NODE_ENV}`, override: true })
+  applyEnvFile(webappEnvFilePath)
+  applyEnvFile(`${webappEnvFilePath}.${process.env.NODE_ENV}`)
 }
 const backendEnvFilePath = findEnvFilePath(__dirname, 'backend/.env')
 if (backendEnvFilePath) {
-  dotenv.config({ path: backendEnvFilePath, override: true })
-  dotenv.config({ path: `${backendEnvFilePath}.${process.env.NODE_ENV}`, override: true })
+  applyEnvFile(backendEnvFilePath)
+  applyEnvFile(`${backendEnvFilePath}.${process.env.NODE_ENV}`)
 }
 
 const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL

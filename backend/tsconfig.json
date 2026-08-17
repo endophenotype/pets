@@ -6,7 +6,6 @@
   "compilerOptions": {
     "plugins": [{ "transform": "typescript-transform-paths" }],
     "paths": {
-      "@pets/webapp/*": ["../webapp/*"],
       "@pets/shared/*": ["../shared/*"]
     },
     "outDir": "./dist",
@@ -29,5 +28,5 @@
     "target": "ES2021",
     "ignoreDeprecations": "5.0"
   },
-  "include": ["src"]
+  "include": ["src", "prisma.config.ts"]
 }

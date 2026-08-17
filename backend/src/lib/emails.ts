@@ -3,7 +3,6 @@ import { env } from './env'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import { getNewPetRoute } from '@pets/webapp/src/lib/routes'
 import { type Pet, type User } from '@prisma/client'
 import fg from 'fast-glob'
 import Handlebars from 'handlebars'
@@ -73,7 +72,7 @@ export const sendWelcomeEmail = async ({ user }: { user: Pick<User, 'nick' | 'em
     templateName: 'welcome',
     templateVariables: {
       userNick: user.nick,
-      addPetUrl: `${getNewPetRoute({ abs: true })}`,
+      addPetUrl: `${env.WEBAPP_URL}/pets/new`,
     },
   })
 }

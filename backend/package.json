@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev --watch ./src/emails/dist,./.env --rs --exit-child ./src/index.ts",
     "test": "jest --runInBand",
-    "build-emails": "rimraf src/emails/dist && mkdirp src/emails/dist && mjml src/emails/[!_]*.mjml -o src/emails/dist",
-    "watch-emails": "mjml -w ./src/emails/[!_]*.mjml -o ./src/emails/dist",
+    "build-emails": "rimraf src/emails/dist && mkdirp src/emails/dist && mjml src/emails/[!_]*.mjml -o src/emails/dist --config.allowIncludes true",
+    "watch-emails": "mjml -w ./src/emails/[!_]*.mjml -o ./src/emails/dist --config.allowIncludes true",
     "copy-emails": "copyfiles ./src/emails/dist/*.html ./dist/backend",
     "build-ts": "rimraf ./dist && node ../node_modules/typescript/bin/tsc --build ./tsconfig.build.json",
     "build": "pnpm build-ts && pnpm build-emails && pnpm copy-emails",
@@ -20,12 +20,8 @@
     "prettify": "prettier --loglevel warn --cache --write \"{src/**/*,*}.{ts,tsx,js,json,yml,scss}\"",
     "prepare": "pnpm pgc && ts-patch install -s"
   },
-  "prisma": {
-    "schema": "./src/prisma/schema.prisma"
-  },
   "dependencies": {
     "@pets/shared": "workspace:*",
-    "@pets/webapp": "workspace:*",
     "@prisma/client": "^6.10.1",
     "@sentry/integrations": "^7.114.0",
     "@sentry/node": "^9.36.0",
@@ -41,7 +37,7 @@
     "lodash": "^4.17.21",
     "marked": "4.3.0",
     "micromatch": "^4.0.8",
-    "mjml": "^4.15.3",
+    "mjml": "5.4.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "picocolors": "^1.1.1",

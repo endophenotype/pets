@@ -3,7 +3,7 @@ import { env } from './env'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import { parsePublicEnv } from '@pets/webapp/src/lib/parsePublicEnv'
+import { parsePublicEnv } from '@pets/shared/src/parsePublicEnv'
 import express, { type Express } from 'express'
 
 import { logger } from './logger'
